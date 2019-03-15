@@ -59,8 +59,9 @@
         }
     }],
     "name": "polygonizer",
+    "taskOwnerEmail": "michael.gleason@digitalglobe.com",
     "version": "0.0.1",
-    "description": "WARNING: THIS TASK IS EXPERIMENTAL AND HAS NOT BEEN ROBUSTLY TESTED. Given a source geotiff, this task will output a polygon vector dataset in the user-specified GIS format. For more information about this task, please contact Mike Gleason (michael.gleason@digitalglobe.com).",
+    "description": "WARNING: THIS TASK IS EXPERIMENTAL AND HAS NOT BEEN ROBUSTLY TESTED. Given a source geotiff, this task will output a polygon vector dataset in the user-specified GIS format. The output vectors will be tiled according to the tiling of the input raster. For more information about this task, please contact Mike Gleason (michael.gleason@digitalglobe.com).",
     "properties": {
         "isPublic": true,
         "timeout": 36000

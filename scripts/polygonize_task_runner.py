@@ -7,7 +7,7 @@ import polygonize
 def convert_type(var, f, expected_type):
 
     # try to convert the inputs to correct types
-    if f is None:
+    if var is None:
         return None
 
     try:
@@ -45,9 +45,9 @@ def main():
     out_name = convert_type(out_name, str, 'String')
     driver = convert_type(driver, str, 'String')
     band = convert_type(band, int, 'Integer')
-    connectivity = convert_type(band, int, 'Integer')
-    mask = convert_type(band, bool, 'Boolean')
-    expression = convert_type(band, str, 'String')
+    connectivity = convert_type(connectivity, int, 'Integer')
+    mask = convert_type(mask, bool, 'Boolean')
+    expression = convert_type(expression, str, 'String')
 
     # get the raster in the input folder
     rasters = glob.glob1(input_folder_tif, '*.tif')
@@ -62,7 +62,7 @@ def main():
 
     print("Polygonizing raster...")
     # run the processing
-    polygonize.main(in_raster, out, driver, band, connectivity, mask, expression)
+    polygonize.main([in_raster, out, '-d', driver, '-b', band, '-c', connectivity, '-m', mask, '-x', expression])
     print("Polygonization process completed successfully.")
 
 
