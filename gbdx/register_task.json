@@ -41,6 +41,12 @@
             "type": "string",
             "description": "Expression to apply before vectorizing like in gdal_calc.py (e.g., 'data>=2'). Default: None.",
             "name": "expression"
+        },
+        {
+            "required": false,
+            "type": "string",
+            "description": "Output field name holding raster value. Default: 'val'.",
+            "name": "field_name"
         }
     ],
     "outputPortDescriptors": [
@@ -60,7 +66,7 @@
     }],
     "name": "polygonizer",
     "taskOwnerEmail": "michael.gleason@digitalglobe.com",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "WARNING: THIS TASK IS EXPERIMENTAL AND HAS NOT BEEN ROBUSTLY TESTED. Given a source geotiff, this task will output a polygon vector dataset in the user-specified GIS format. The output vectors will be tiled according to the tiling of the input raster. For more information about this task, please contact Mike Gleason (michael.gleason@digitalglobe.com).",
     "properties": {
         "isPublic": true,

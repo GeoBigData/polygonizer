@@ -40,6 +40,7 @@ def main():
     connectivity = inputs.get('connectivity', '4')
     mask = inputs.get('mask', 'True')
     expression = inputs.get('expression', None)
+    field_name = inputs.get('field_name', 'val')
 
     # convert the inputs to the correct dtypes
     out_name = convert_type(out_name, str, 'String')
@@ -48,6 +49,7 @@ def main():
     connectivity = convert_type(connectivity, int, 'Integer')
     mask = convert_type(mask, bool, 'Boolean')
     expression = convert_type(expression, str, 'String')
+    field_name = convert_type(field_name, str, 'String')
 
     # get the raster in the input folder
     rasters = glob.glob1(input_folder_tif, '*.tif')
@@ -62,7 +64,14 @@ def main():
 
     print("Polygonizing raster...")
     # run the processing
-    polygonize.main([in_raster, out, '-d', driver, '-b', band, '-c', connectivity, '-m', mask, '-x', expression])
+    polygonize.main([in_raster,
+                     out,
+                     '-d', driver,
+                     '-b', band,
+                     '-c', connectivity,
+                     '-m', mask,
+                     '-x', expression,
+                     '-f', field_name])
     print("Polygonization process completed successfully.")
 
 

@@ -20,10 +20,12 @@ import numexpr as ne
               help="Should zero values be interpreted as masked? Default is true.")
 @click.option('expression', '-x', required=False, type=str, default=None,
               help="Expression to apply before vectorizing like in gdal_calc.py (e.g., 'data>=2').")
-def main(in_raster, out, driver, band, connectivity, mask, expression=None):
+@click.option('field_name', '-f', required=False, type=str, default='val',
+              help="Output field name holding raster value. Default is 'val'.")
+def main(in_raster, out, driver, band, connectivity, mask, expression, field_name):
     # specify the output schema for the output vector file
     schema = {'geometry'  : 'Polygon',
-              'properties': {'val': 'int'}}
+              'properties': {field_name: 'int'}}
     with rasterio.open(in_raster) as src, \
             fiona.open(out, 'w', driver=driver, schema=schema, crs=src.crs) as dst:
 
@@ -68,11 +70,11 @@ def main(in_raster, out, driver, band, connectivity, mask, expression=None):
                 if isinstance(g_valid, geometry.MultiPolygon):
                     for g_part in g_valid:
                         geojson = {'geometry': g_part.__geo_interface__,
-                                   'properties': {'val': v}}
+                                   'properties': {field_name: v}}
                         dst.write(geojson)
                 else:
                     geojson = {'geometry': g_valid.__geo_interface__,
-                               'properties': {'val': v}}
+                               'properties': {field_name: v}}
                     dst.write(geojson)
 
 if __name__ == '__main__':
