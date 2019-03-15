@@ -1,0 +1,68 @@
+{
+    "inputPortDescriptors": [
+        {
+            "required": true,
+            "type": "directory",
+            "description": "Directory holding the input raster to polygonize. Must be a geotiff that has been tiled (e.g., gdal_translate -co TILED=YES in_raster.tif  out_raster.tif)",
+            "name": "tif"
+        },
+        {
+            "required": false,
+            "type": "string",
+            "description": "Output name for polygon GIS data. Default: 'polygons.shp'.",
+            "name": "out_name"
+        }, 
+        {
+            "required": false,
+            "type": "string",
+            "description": "Output vector format (ogr driver). Default: 'ESRI Shapefile'.",
+            "name": "driver"
+        },
+        {
+            "required": false,
+            "type": "string",
+            "description": "Input raster band to process. Default: '1'.",
+            "name": "band"
+        },
+        {
+            "required": false,
+            "type": "string",
+            "description": "Connectivity (4 or 8). Default: '4'.",
+            "name": "connectivity"
+        },
+        {
+            "required": false,
+            "type": "string",
+            "description": "Should zero values be interpreted as masked? Default: 'True'.",
+            "name": "mask"
+        },
+        {
+            "required": false,
+            "type": "string",
+            "description": "Expression to apply before vectorizing like in gdal_calc.py (e.g., 'data>=2'). Default: None.",
+            "name": "expression"
+        }
+    ],
+    "outputPortDescriptors": [
+        {
+            "required": true,
+            "type": "directory",
+            "description": "Directory holding output vector GIS dataset.",
+            "name": "data"
+        }
+    ],
+    "containerDescriptors": [{
+        "type": "DOCKER",
+        "command": "/opt/conda/envs/polygonizer/bin/python /scripts/polygonize_task_runner.py",
+        "properties": {
+            "image": "mgleason/polygonizer:latest"
+        }
+    }],
+    "name": "polygonizer",
+    "version": "0.0.1",
+    "description": "WARNING: THIS TASK IS EXPERIMENTAL AND HAS NOT BEEN ROBUSTLY TESTED. Given a source geotiff, this task will output a polygon vector dataset in the user-specified GIS format. For more information about this task, please contact Mike Gleason (michael.gleason@digitalglobe.com).",
+    "properties": {
+        "isPublic": true,
+        "timeout": 36000
+    }
+}

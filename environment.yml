@@ -1,0 +1,21 @@
+# environment.yml
+name: polygonizer
+channels: !!python/tuple
+- !!python/unicode
+  'conda-forge'
+- !!python/unicode
+  'digitalglobe'
+- !!python/unicode
+  'defaults'
+dependencies:
+- conda-forge::python=3.6.6
+- conda-forge::numpy>=1.15,<1.16
+- conda-forge::rasterio>=1.0,<2.0
+- conda-forge::fiona==1.8.4
+- conda-forge::shapely==1.6.4
+- conda-forge::pyproj>=1.9.5,<2.0
+- conda-forge::tqdm>=4.28
+- digitalglobe::gbdxtools>=0.15,<0.16
+- pip:
+  - utm==0.4.2
+  - numexpr>=2.6
